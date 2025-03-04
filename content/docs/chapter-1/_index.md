@@ -43,13 +43,13 @@ When building an RL system, we break down the problem into:
 
 because doing a little pre-work saves time later.
 
-## Tic Tac Toe
+## Tic-Tac-Toe
 
-Let's apply RL to Tic-Tac-Toe. RL does not need deep learning. A valid RL agent can be as simple as a look up table. Tic-Tac-Toe is a two player game where each player takes turns marking a single square in a 3x3 grid. The first player to have marked 3 squares making a horizontal, vertical or diagonal line wins. Let's breakdown Tic-Tac-Toe in the framework above:
+Let's apply RL to Tic-Tac-Toe. Tic-Tac-Toe is a two player game where each player takes turns marking a single square in a 3x3 grid. The first player to have marked 3 squares making a horizontal, vertical or diagonal line wins. Let's break down Tic-Tac-Toe in the framework above:
 
 ```
 Example Tic-Tac-Toe configurations:
-   X Wins          Tie         Early Game
+   X Wins          Tie          Mid Game
  X | O | X      X | O | X      X |   | O  
 -----------    -----------    -----------
  O | X | O      X | X | O        | O |    
@@ -60,7 +60,7 @@ Example Tic-Tac-Toe configurations:
 
 ### Goal
 
-The goal of Tic-Tac-Toe is to win. After a player has achieved 3-in-a-row, the game will reset. We call the time it takes from beginning to the end of the game an *episode* (more on this later).
+The goal of Tic-Tac-Toe is to win. After a player has achieved 3-in-a-row, the game will reset. We call the time it takes from the beginning to the end of the game an *episode* (more on this later).
 
 ### Environment
 
@@ -81,7 +81,7 @@ We can start with a reward of
 -  +1 if the player wins
 -  -1 if the player loses
 
-The act of modifying the reward for a better system is known as *reward shaping*. 
+Modifying the reward to make a better system is known as *reward shaping*. 
 
 ### Training the Policy
 
@@ -89,3 +89,7 @@ Now that we have created our Tic-Tac-Toe RL system, we can attempt to train a po
 
 For Pokémon, we will similarly break down the game. Let's dig in.
 
+<div style="display: flex; justify-content: space-between; width: 100%;">
+{{< button relref="/" >}}« Front Page{{< /button >}}
+{{< button relref="docs/chapter-2/env-setup/index" >}}The Environment »{{< /button >}}
+</div>

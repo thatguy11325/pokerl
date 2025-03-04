@@ -7,15 +7,15 @@ weight = 2
 
 ## Game Overview
 
-Before discussing observations, rewards and the policy we will provide a brief overview of the game's challenges. Pokémon is a complex game with multiple tasks and puzzles that can be accomplished nonlinearly. We cover Pokémon's challenges in greater depth in the [Appendix]({{<ref "/docs/appendix/breakdown/index" >}} "appendix").
+Before discussing observations, rewards, and the policy, we will provide a brief overview of the game's challenges. Pokémon is a complex game with multiple tasks and puzzles that can be accomplished nonlinearly. We cover Pokémon's challenges in greater depth in the [Appendix]({{<ref "/docs/appendix/breakdown/battling/index" >}} "appendix").
 
 At a high level, to beat Pokémon, you must:
 
 1. Beat the 8 Gym Leaders (a form of video game boss).  
-2. Acquire `HMs` (items) to teach the field moves `CUT`, `STRENGTH`, and, `SURF` and Pokémon to teach the field moves to. Field moves are abilities that can be used outside of battle to unlock a new area or make it easier to traverse an existing area.  
+2. Acquire `HMs` (items) to teach the field moves `CUT`, `STRENGTH`, and, `SURF` and Pokémon to teach the field moves to. Field moves are abilities that can be used outside of battle to unlock new areas or make it easier to traverse an existing area.  
 3. Teach capable Pokémon the field moves `CUT`, `STRENGTH`, and `SURF`.
 4. Acquire any items (not HMs) required for field interactions. Like field moves, there are items that are required to unlock new areas.  
-5. Use field moves or items for field interactions to remove any game blocking obstacles.  
+5. Use field moves or items for field interactions to remove any game-blocking obstacles.  
 6. Complete the Team Rocket storyline.     
 7. Beat the 6 required rival battles.
 8. Beat the Elite 4 and Champion.
@@ -45,7 +45,7 @@ flowchart TD
     LLL --> L(Save Mr. Fuji at the top floor of Lavender Tower) 
     H --> I(Defeat Lt. Surge)
     H --> J(Defeat Erika) 
-    H --> MM(Obtain a drink from the vendeing machines at the top of Celadon Mart) 
+    H --> MM(Obtain a drink from the vending machines at the top of Celadon Mart) 
     MM --> M(Deliver Drink to Saffron Guard) --> O
     L --> N(Obtain Pokéflute)
     L --> OO(Defeat Rival 5 in Silph Co) --> O(Defeat Giovanni in Silph Co) --> P(Defeat Sabrina)
@@ -63,7 +63,7 @@ flowchart TD
 
 ## Defining a "Route"
 
-For the agent to complete all objectives, we wanted to simplify the number of game as much as possible to maximizing the likelihood of success. To limit non-determinism, we started all environments after the "Parcel Delivery" event. Additionally, we want to guarantee the agent acquires the gift Lapras. Starting the agent with a specific Pokémon would guarantee later stages of the game would be possible. Given the previous breakdown, here’s a simplified *route* we had the agent to learn:
+For the agent to complete all objectives, we wanted to simplify the game as much as possible to maximize the likelihood of success. For determinism, we started all environments after the "Parcel Delivery" event. Additionally, we wanted to guarantee the agent would receive the gift Lapras in Silph Co. Here’s the simplified route:
 
 {{< mermaid >}}
 ---
@@ -123,41 +123,42 @@ RIVAL6 --> E4
 
 {{< /mermaid >}}
 
-This route is *extremely* complex. The average human player will take 25 hours to beat Pokémon on the first try. Incentivizing exploration for a space this big took a lot of effort.
+This route is *extremely* complex. The average human player will take 25 hours to beat Pokémon on the first try. Training takes between 7 hours and 1 week. 
 
 ### Risk Management
 
-Even though we simplified the game, we still needed risk mitigation. Pokémon contains numerous game ending risks including:
+Even though we simplified the game, we still needed risk mitigation. Pokémon contains numerous game-ending risks in the environment including:
 
-* Permanently losing vital Pokémon  
-* Catching Pokémon and not having enough space for the Lapras or any other Pokémon that can learn `SURF`  
-* If the agent obtains too many items, then there may not be enough room for key items  
+* Permanently losing vital Pokémon. 
+* Catching Pokémon and not having enough space for the Lapras or any other Pokémon that can learn `SURF`.  
+* If the agent obtains too many items, then there may not be enough room for key items.
 * It is possible to soft-lock if you cannot obtain any more money at the time the Safari Zone objectives need to be completed.  
 * Only having Pokémon with non-damaging moves.
 
-We’d like to emphasize that *none* of these issues require teaching the agent how to best Pokémon battles.
+We’d like to emphasize that *none* of these issues require teaching the agent how to battle.
 
 ### Scripting vs. Emergence
 
 To handle these risks and difficulties, we split agent behavior into two classes:
 
-* **Scripted:** Meaning actions taken by the agent not controlled by the policy.  
+* **Scripted:** Meaning the environment performs certain actions for the agent.  
 * **Emergent:** Allowing the agent to discover its own strategies.
 
-Ideally, no scripted behavior would be needed. However, we needed scripts. We aimed to only script behaviors that require human intuition or tasks that are not really a core part of Pokémon. These included.
+Ideally, no scripted behavior would be needed. However, we needed scripts. We aimed to only script behaviors that require human intuition or tasks that are not really a core part of Pokémon. These included:
 
-* Item management - the agent will toss all non-key items if the agent fills their inventory.
+* Item management - the environment will toss all non-key items if the player's bag is full.
 * Money management - the agent will have infinite money.  
 * Solving puzzles that require `STRENGTH`. 
 * Blocking the Indigo Plateau exit at the end of the game.
+* Using `FLASH`.
 
-To make development easier, we wrote scripts to remove complexity and speed up development. When writing RL systems, this is common practice. Make the simplest environment possible, then slowly roll back the assumptions. These scripts are now unneeded, but were invaluable during development. They included
+We additionally used scripts to ease development. These scripts have since been removed.
 
 * Teaching HMs.
 * Automatically using HMs outside of battle.
 * Automatically Pokéflute.
-* Maxxing the Pokémon’s stats.
-* Automatic insertion of drinks for the Saffron guards if the agent *entered* the Celadon Mart.
+* Maxing the Pokémon’s stats.
+* Automatic insertion of drinks into the player's bag if the player *entered* Celadon Mart.
 * Automating elevator usage. If an agent entered an elevator, the elevator would go to the next floor modulo number of floors.
 * Disabling wild battles to simplify dungeons.
 
@@ -165,14 +166,14 @@ To make development easier, we wrote scripts to remove complexity and speed up d
 
 The Python library [Gymnasium](https://gymnasium.farama.org/) provides a fairly straightforward API for defining an environment. The environment can be simplified into two functions: `Step` and `Reset`
 
-## Steps
+## Step
 
-`Step` is a function which is given actions for the environment and returns an observation, any logging info and whether or not to the environment should reset.
+`Step` is a function which is given actions for the environment and returns an observation, any logging info and whether or not the environment should reset.
 
-Our step function for Pokémon can naively be written as:
+Our step function for Pokémon can be written as:
 
 - Receive a button press action.
-- Send the button press to the gameboy emulator.
+- Send the button press to the Gameboy emulator.
 - Wait some frames for the action to have an effect on the environment.
 - Sample the environment.
 - Return data based on the sample.
@@ -191,23 +192,25 @@ def step(self, action: int):
 {{< /highlight >}}
 </div>
 
-## Resets, Episodes and the Goal
+## Reset, Episode and the Goal
 
-Reset handles the initialization for an *episode*. An episode is a sequence of actions that ends when some terminal state is reached.
+Reset handles the initialization for an episode. An episode is a sequence of actions that ends when some terminal state is reached.
 
-A reset will occur when an environment:
+Resets usually occur when an environment:
 
 - Achieves a major milestone, such as defeating a boss.
-- Encounters a failure state, such as losing all their lives.
-- Reaches a predefined time or action limit, such as 100 tetriminos in Tetris,
+- Encounters a failure state, such as losing all lives.
+- Reaches a predefined time or action limit, such as 100 tetriminos in Tetris.
 
-Pokémon is in the realm of "long episodic RL." There is no strict rule on what a long episode is, but Pokémon takes 25 hours for the average person to beat. That's much longer than a session of Pac-Man or Breakout. Long episodes mean that the environment may not return large rewards for a very long time. If the environment only returns large rewards at the end of an episode, the agent may have trouble learning long term policies.
+Pokémon is in the realm of "long episodic RL." There is no strict rule on what a long episode is, but Pokémon takes 25 hours for the average person to beat. That's much longer than a session of Pac-Man or Breakout. Long episodes mean that the environment may not return rewards for a very long time. If the environment only returns rewards at the end of an episode, the agent may have trouble learning long term policies.
 
-For example, if we were playing 100x100 Tic-Tac-Toe, the environment wouldn't return a reward for up to a max 5000 steps. Imagine having to plan out a 5000 step strategy. It's not easy! Later, we'll go over how we handled rewards for Pokémon's long episodes.
+For example, if we were playing 100x100 Tic-Tac-Toe, it could take up to 5000 steps to return a reewards. Imagine having to plan out a 5000 step strategy. It's not easy! Later, we'll go over how we handled rewards for Pokémon's long episodes.
 
-Based on Peter Whidden's prior work, we began with an episode as a fixed number of steps. Over time, we tried other strategies such as dynamically increasing the number of steps for per episode as important milestones occur within an environment. However, we decided a Pokémon Red episode's terminal state is when an unrecoverable state (soft-lock) is met, e.g., such as running out of money or when the game is complete. 
+Based on Peter Whidden's prior work, we began with an episode as a fixed number of steps. Over time, we tried other strategies such as dynamically increasing the number of steps per episode as important milestones occur within an environment. However, we decided a Pokémon Red episode's terminal state is when an unrecoverable state (soft-lock) is met, e.g., such as running out of money or when the game is complete. 
 
 Because our **goal** was focused on becoming the Champion (a very long task), we compromised. We created "mini-episodes.” An episode would be the duration of an entire game. The environment's state would periodically reset mid-episode, but the emulator state would not:
+
+{{% details "Our reset function" closed %}}
 
 <div style="border:1px solid black;">
 {{< highlight python >}}
@@ -253,4 +256,4 @@ class OnResetExplorationWrapper(gym.Wrapper):
 {{< /highlight >}}
 </div>
 
-
+{{% /details %}}
