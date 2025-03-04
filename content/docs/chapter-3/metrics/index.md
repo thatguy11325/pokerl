@@ -55,7 +55,7 @@ Or we could see how many events the agent has finished.
 
 </div>
 
-We could see if my pokecenter healing reward was finally tuned correctly.
+We could see if our pokecenter healing reward was finally tuned correctly.
 
 <div style="text-align: center;">
 

@@ -5,7 +5,7 @@ weight = 40
 
 # Actually Coding the RL System
 
-So we have a policy, observations, an environment and a reward. Now it's time to discuss how we wrote the RL system. Along the way, we'll provide relevant snippets of code and tricks done to make my system run as fast as possible.
+So we have a policy, observations, an environment and a reward. Now it's time to discuss how we wrote the RL system. Along the way, we'll provide relevant snippets of code and tricks done to make the system run as fast as possible.
 
 For compute, Joseph Suarez, the creator of [PufferAI](https://puffer.ai/) and the [PufferLib](https://github.com/PufferAI/PufferLib) RL Python library, graciously donated 4 machines to this effort. Each machine contained a NVIDIA 4090 GPU, Intel Core i9-14900K, 125 GB of RAM and 2TB of disk space. Before his contribution, we were paying $200/month using [vast.ai](https://vast.ai/) for training with worse hardware.
 

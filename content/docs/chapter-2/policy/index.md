@@ -226,7 +226,7 @@ Items held in the agent's bag are also identified by ID. The Item IDs are passed
 All party data is concatenated together and passed through a small dense layer to create a "Pokémon” space.
 
 ## Binary Vectors
-In RAM, events are stored as 320 byte array each bit optionally representing one in-game event. We unpack this aray into a 2560 byte vector, filter for flags that are used by the game and pass the vector to the policy. The event vector in RAM does not include Lapras, Rival 3, defeating the Game Corner Rocket and the giving a drink to a Saffron Guard. We additionally pass these 4 "events" separately as they are "event"-like in my opinion.
+In RAM, events are stored as 320 byte array each bit optionally representing one in-game event. We unpack this aray into a 2560 byte vector, filter for flags that are used by the game and pass the vector to the policy. The event vector in RAM does not include Lapras, Rival 3, defeating the Game Corner Rocket and the giving a drink to a Saffron Guard. We additionally pass these 4 "events" separately as they are "event"-like in our opinion.
 
 ## Safari Steps
 The numbers of steps left in the Safari Zone is in the range [0, 502]. We normalize the steps observation to a value between 0 and 1 where 0 means no steps are left and 1 means you have the max number of steps remaining.
