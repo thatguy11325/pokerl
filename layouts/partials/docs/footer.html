@@ -2,13 +2,13 @@
 
 <div class="next-post">
   {{ if .Next }}
-  <a class="link-reverse" href="{{ .Next.Permalink }}?ref=footer">« {{ .Next.Title | truncate 50 "..." }}</a>
+  <a class="book-btn" href="{{ .Next.Permalink }}?ref=footer" rel="noopener">« {{ .Next.Title | truncate 50 "..." }}</a>
   {{ end }}
 </div>
 
 <div class="previous-post">
   {{ if .Prev }}
-  <a class="link-reverse" href="{{ .Prev.Permalink }}?ref=footer">{{ .Prev.Title | truncate 50 "..."}} »</a>
+  <a class="book-btn" href="{{ .Prev.Permalink }}?ref=footer" rel="noopener">{{ .Prev.Title | truncate 50 "..."}} »</a>
   {{ end }}
 </div>
 

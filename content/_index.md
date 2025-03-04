@@ -10,10 +10,10 @@ type: docs
 </div>
 
 Hi! Since 2020, we've been developing a reinforcement learning (RL) agent to beat the 1996 game Pokémon Red.
-**As of February 2025, we are able to beat Pokémon Red with Reinforcement Learning using a <10 million parameter policy (60500x smaller than DeepSeekV3) and with minimal simplifications.** This website acts as a journal describing the system's current state. [All code is open sourced and available for you, the reader, to try](https://github.com/thatguy11325/Pokémonred_puffer).
+**As of February 2025, we are able to beat Pokémon Red with Reinforcement Learning using a <10 million parameter policy (60500x smaller than DeepSeekV3) and with minimal simplifications.** The output is not a policy capable of beating Pokémon, but a technique for producing solutions to Pokémon. This website describes the system's current state. [All code is open sourced and available for you, the reader, to try](https://github.com/thatguy11325/Pokémonred_puffer).
 
 
-As improvements to the codebase is made, the changelog will be updated. If you're not familiar with Pokémon, we recommend you read the first 1/3 of the website. Otherwise, assuming you're familiar with RL, we recommend you skip to [Chapter 2 - Observations]({{< ref "/docs/chapter-2/observations/index.md" >}} "Chapter 2 - Observations").
+As improvements to the codebase is made, the changelog will be updated.
 
 ## What is Pokémon Red?
 
@@ -62,7 +62,7 @@ out of date. If you can build a system that can create new data on the fly, you 
 
 With RL, we built an agent with minimal resources and achieved amazing results.
 
-{{< button relref="docs/chapter-1/the-loop" >}}Next Page{{< /button >}}
+{{< button relref="docs/chapter-1" >}}Next Page{{< /button >}}
 
 ## Authors
 
@@ -83,4 +83,10 @@ For their countless hours making the world map asset.
 
 ### Feb. 28, 2025 - First Draft
 
-{{< button relref="docs/chapter-1/the-loop" >}}Next Page{{< /button >}}
+{{< figure
+  src="puffer.png"
+  link="https://www.puffer.ai"
+  class="ma0 w-75"
+>}}
+
+{{< button relref="docs/chapter-1" >}}Next Page{{< /button >}}

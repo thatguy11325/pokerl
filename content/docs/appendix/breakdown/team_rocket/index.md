@@ -1,6 +1,6 @@
 +++
 title = 'Team Rocket'
-weight = 25
+weight = 105
 +++
 
 ## Team Rocket Storyline

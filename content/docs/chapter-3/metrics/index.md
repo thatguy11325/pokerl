@@ -61,7 +61,7 @@ We could see if my pokecenter healing reward was finally tuned correctly.
 
 {{< figure
   src="assets/pokecenter.png"
-  caption="An example metric. With this plot, We could track how often the agents were using the Pokecenter."
+  caption="An example metric. With this plot, we could track how often the agents were using the Pokecenter."
   class="ma0 w-75"
 >}}
 

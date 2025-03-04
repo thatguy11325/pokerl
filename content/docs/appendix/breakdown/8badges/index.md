@@ -1,6 +1,6 @@
 +++
 title = 'The 8 Badges'
-weight = 23
+weight = 93
 +++
 
 # The 8 Badges

@@ -74,4 +74,4 @@ Although we have not explained the Safari Zone in-depth, we wanted to prevent th
 
 ### Whether or not the agent has received the gift Lapras.  
 
-The Lapras observation is admittedly redundant given the party observation. However, Lapras is extremely important for game progression per [The Route]({{<ref "/docs/chapter-1/breakdown/route" >}} "The Route").
+The Lapras observation is admittedly redundant given the party observation. However, Lapras is extremely important for game progression per [The Route]({{<ref "/docs/chapter-2/env-setup#defining-a-route" >}} "The Route").

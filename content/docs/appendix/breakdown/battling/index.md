@@ -1,6 +1,6 @@
 +++
 title = 'Pokémon Battling'
-weight = 22
+weight = 92
 +++
 
 # Pokémon Battling
@@ -15,7 +15,7 @@ weight = 22
 <figcaption>Various battle situations. From left to right: (a) Wild battle. (b) Trainer battle. (c) Running away from battle. (d) Catching a Pokémon. (e) Pokémon fainting and Player blacking out.</figcaption>
 </div>
 
-Half of the previously mentioned objectives involve battling and winning against other trainers. However, teaching battling *is not* required to make an agent capable of completing Pokémon with RL.
+Half of Pokémon's objectives involve battling and winning against other trainers. However, teaching battling *is not* required to make an agent capable of completing Pokémon with RL.
 
 ## The Battle System
 

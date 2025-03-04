@@ -1,6 +1,6 @@
 +++
 title = 'Field Interactions and Exploration'
-weight = 24
+weight = 94
 +++
 
 # Field Interactions and Exploration

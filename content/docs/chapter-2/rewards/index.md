@@ -23,6 +23,7 @@ In the end, we rewarded:
 
 - The number of unique coordinates visited during a mini-episode.
 - The number of signs the agent interacts with during a mini-episode.
+- The number of objects the agent interacts with during a mini-episode.
 - The number of unique moves taught.
 - The number of valid and invalid uses of HMs/Pokéflute in the overworld.   
 - The number of tile types an HM/Pokéflute was used on.
@@ -41,8 +42,28 @@ Game progress is defined by accomplishing high value sparse rewards. These inclu
 Without these rewards, the agent would ultimately wander until the mini-episode reset and make no progress.
 
 ## Map ID Rewards
+<div style="text-align: center; align-items : center;">
 
-In general, we found that in order to "solve" a map ID (a map ID is a unique identifier for the current game area, e.g., town, route, cave floor, etc.) and accomplish and event, we needed around 10-20 agents exploring the map ID. 10-20 agents map to around 10% map ID coverage. 
+{{% columns ratio="1;1" %}}
+  {{< figure
+    src="assets/lotsa_agents.png"
+    caption="Lots of agents exploring the area where you can get the `HM02`."
+    class="ma0 w-75"
+  >}}
+  
+  <---> <!-- magic separator, between columns -->
+
+  {{< figure
+    src="assets/lotsa2.png"
+    caption="Lots of agents exploring the Celadon Game Corner. The agent liked to exploit the object reward the slot machines provided."
+    class="ma0 w-75"
+  >}}
+
+{{% /columns %}}
+
+</div>
+
+We observed that in order to "solve" all events on a map (a map is the currently loaded game area, e.g., town, route, cave floor, etc.) and, we needed around 10-20 environments exploring the map. For Pokémon, 10-20 agents map to around 10% map ID coverage. 
 
 We regretfully "boosted" coordinates reward if the agent explored a currently important map ID. On one hand, we are potentially putting the game on rails. On the other hand, we experienced that the agent would not focus on important areas, e.g., Rocket Hideout, unless we boosted rewards for specific map IDs.
 
@@ -67,7 +88,7 @@ We added a specific Safari Zone reward for this case. The agent obtains a reward
 
 ## Level Reward
 
-Peter Whidden suggested a level reward in his video. The level reward 
+Peter Whidden suggested a level reward in his video. 
 We took the level reward from Peter Whidden's video without many changes. Any attempt to remove the reward led to a failed experiment.
 
 The level reward:
